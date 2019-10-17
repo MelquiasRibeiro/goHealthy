@@ -1,40 +1,66 @@
-package com.goHealthy;
+package com.goHealthy.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 public class  Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;	
 	private String lugar;
-	private String inscritos;
+	private String data;
 	private String hora;
 	private String categoria;
+	private Boolean status;
 	
 	public Evento() {
 		
 	}
 			
-	public Evento(Integer id, String nome, String lugar, String inscritos, String hora, String categoria) {
+	public Evento(Integer id, String nome, String lugar, String hora,String data, String categoria, Boolean status) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.lugar = lugar;
-		this.inscritos = inscritos;
 		this.hora = hora;
 		this.categoria = categoria;
+		this.status=status;
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
 	public String getNome() {
 		return nome;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 
 	public void setNome(String nome) {
@@ -47,14 +73,6 @@ public class  Evento implements Serializable {
 
 	public void setLugar(String lugar) {
 		this.lugar = lugar;
-	}
-
-	public String getInscritos() {
-		return inscritos;
-	}
-
-	public void setInscritos(String inscritos) {
-		this.inscritos = inscritos;
 	}
 
 	public String getHora() {
