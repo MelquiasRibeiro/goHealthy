@@ -18,6 +18,8 @@ public class AspiranteService {
         return aspiranteRepository.findById(id);
     }
 
+
+    //DTO approach, need delete this if i decide not use it
     public AspiranteDTO toDTO(Aspirante aspirante) {
         AspiranteDTO aspiranteDTO = new AspiranteDTO();
         aspiranteDTO.setId(aspirante.getId());
@@ -27,5 +29,9 @@ public class AspiranteService {
         aspiranteDTO.setNome(aspirante.getNome());
         aspiranteDTO.setNumero(aspirante.getNumero());
         return aspiranteDTO;
+    }
+
+    public void deleteById(Integer id) {
+        aspiranteRepository.deleteById(id);
     }
 }

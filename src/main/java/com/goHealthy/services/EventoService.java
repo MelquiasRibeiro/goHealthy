@@ -1,7 +1,9 @@
 package com.goHealthy.services;
 
 import com.goHealthy.dataTransferObjects.EventoDTO;
+import com.goHealthy.domain.Aspirante;
 import com.goHealthy.domain.Evento;
+import com.goHealthy.repositories.AspiranteRepository;
 import com.goHealthy.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ os services são nada mais que classes intermediarias de tratamento de dados.
 public class EventoService {
     @Autowired
     private EventoRepository repository;
+
+
 
     public List<Evento> getAll(){
         return repository.findAll();
@@ -48,6 +52,8 @@ public class EventoService {
     public void updateData(Evento infoToUpdate,Evento evento){
         //Pass Data to the new object infoToUpdata from evento that can be updated.
     }
+
+    //DTO approach, need delete this if i decide not use it
     public EventoDTO toDTO(Evento evento){
         EventoDTO eventoDTO= new EventoDTO();
         eventoDTO.setCategoria(evento.getCategoria());
@@ -63,4 +69,6 @@ public class EventoService {
     public Optional<Evento> find(Integer id) {
         return repository.findById(id);
     }
+
+
 }

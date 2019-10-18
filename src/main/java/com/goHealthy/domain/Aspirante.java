@@ -1,6 +1,6 @@
 package com.goHealthy.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
@@ -24,6 +24,7 @@ public class Aspirante implements Serializable {
     private Boolean status;
     private String senha;
 
+    @JsonIgnore
     @ManyToMany(mappedBy="participantesEvento")
     Set<Evento> participandoEventos;
 
