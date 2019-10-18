@@ -37,7 +37,7 @@ public class EventoService {
     public Evento put(Evento evento){
         //Pass the informations than can be updated in the object.
         Optional<Evento> infoToUpdate=find(evento.getId());
-        if (!infoToUpdate.isEmpty()) {
+        if (infoToUpdate.isPresent()) {
             updateData(infoToUpdate.get(),evento);
             return repository.save(infoToUpdate.get());
         }

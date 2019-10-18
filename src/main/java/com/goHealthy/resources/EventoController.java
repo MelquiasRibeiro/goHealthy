@@ -28,7 +28,7 @@ public class EventoController {
     @GetMapping("/{id}")
     public ResponseEntity<Evento> get(@PathVariable Integer id){
         Optional<Evento> evento = service.find(id);
-        if (evento.isEmpty()) {
+        if (!(evento.isPresent())) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(evento.get());
