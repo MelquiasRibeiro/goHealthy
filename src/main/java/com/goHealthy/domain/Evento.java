@@ -1,10 +1,8 @@
 package com.goHealthy.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class  Evento implements Serializable {
@@ -18,6 +16,13 @@ public class  Evento implements Serializable {
 	private String hora;
 	private String categoria;
 	private Boolean status;
+
+	@ManyToMany
+	@JoinTable(
+			name = "participaçao_evento",
+			joinColumns = @JoinColumn(name = "aspirante_id"),
+			inverseJoinColumns = @JoinColumn(name = "evento_id"))
+	Set<Aspirante> participantesEvento;
 	
 	public Evento() {
 		
@@ -38,6 +43,13 @@ public class  Evento implements Serializable {
 	}
 
 
+	public Set<Aspirante> getParticipantesEvento() {
+		return participantesEvento;
+	}
+
+	public void setParticipantesEvento(Set<Aspirante> participantesEvento) {
+		this.participantesEvento = participantesEvento;
+	}
 
 	public void setId(Integer id) {
 		this.id = id;

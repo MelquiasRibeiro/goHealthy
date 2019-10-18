@@ -2,7 +2,9 @@ package com.goHealthy.resources;
 
 
 
+import com.goHealthy.domain.Aspirante;
 import com.goHealthy.domain.Evento;
+import com.goHealthy.services.AspiranteService;
 import com.goHealthy.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,26 +20,46 @@ import java.util.Optional;
 public class EventoController {
 
     @Autowired
-    private EventoService service;
+    private EventoService eventoService;
+
+    @Autowired
+    private AspiranteService aspiranteService;
 
     @GetMapping
     public List<Evento> getAll(){
-        return service.getAll();
+        return eventoService.getAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Evento> get(@PathVariable Integer id){
-        Optional<Evento> evento = service.find(id);
+        Optional<Evento> evento = eventoService.find(id);
         if (!(evento.isPresent())) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(evento.get());
     }
 
+    @PostMapping("/{id}/participate")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Evento> post(@PathVariable Integer id, @RequestBody Aspirante aspirante){
+        Optional<Evento> evento = eventoService.find(id);
+        if(!(evento.isPresent())) {
+            return ResponseEntity.notFound().build();
+        }
+        else{
+            Optional<Aspirante> aspiranteById=aspiranteService.find(aspirante.getId());
+            if(aspiranteById.isPresent()){
+                evento.get().getParticipantesEvento().add(aspiranteById.get());
+                eventoService.post(evento.get());
+                        return ResponseEntity.ok(evento.get());
+            }
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Evento post(@RequestBody Evento evento){
-        return service.post(evento);
+        return eventoService.post(evento);
     }
 }

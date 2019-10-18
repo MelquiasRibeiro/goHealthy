@@ -2,6 +2,7 @@ package com.goHealthy.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
@@ -19,6 +20,9 @@ public class Aspirante implements Serializable {
     private Integer avaliacao;
     private Boolean status;
     private String senha;
+
+    @ManyToMany(mappedBy="participantesEvento")
+    Set<Evento> participandoEventos;
 
     public String getNome() {
         return nome;
@@ -64,6 +68,14 @@ public class Aspirante implements Serializable {
         return avaliacao;
     }
 
+    public Set<Evento> getParticipandoEventos() {
+        return participandoEventos;
+    }
+
+    public void setParticipandoEventos(Set<Evento> participandoEventos) {
+        this.participandoEventos = participandoEventos;
+    }
+
     public void setAvaliacao(Integer avaliacao) {
         this.avaliacao = avaliacao;
     }
@@ -97,12 +109,14 @@ public class Aspirante implements Serializable {
         return Objects.hash(getId());
     }
 
-    public Aspirante(String nome, Integer id, String email, String numero, Boolean status, String senha) {
+    public Aspirante(String nome, String email, String numero, Boolean status, String senha) {
         this.nome = nome;
-        this.id = id;
         this.email = email;
         this.numero = numero;
         this.status = status;
         this.senha = senha;
+    }
+    public Aspirante(){
+
     }
 }
