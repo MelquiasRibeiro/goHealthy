@@ -1,5 +1,6 @@
 package com.goHealthy.services;
 
+import com.goHealthy.dataTransferObjects.EventoDTO;
 import com.goHealthy.domain.Evento;
 import com.goHealthy.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,17 @@ public class EventoService {
     //Need work together with put
     public void updateData(Evento infoToUpdate,Evento evento){
         //Pass Data to the new object infoToUpdata from evento that can be updated.
+    }
+    public EventoDTO toDTO(Evento evento){
+        EventoDTO eventoDTO= new EventoDTO();
+        eventoDTO.setCategoria(evento.getCategoria());
+        eventoDTO.setData(evento.getData());
+        eventoDTO.setHora(evento.getHora());
+        eventoDTO.setId(evento.getId());
+        eventoDTO.setLugar(evento.getLugar());
+        eventoDTO.setNome(evento.getNome());
+        eventoDTO.setStatus(evento.getStatus());
+        return eventoDTO;
     }
 
     public Optional<Evento> find(Integer id) {

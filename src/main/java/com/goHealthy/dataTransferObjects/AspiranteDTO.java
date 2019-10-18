@@ -1,5 +1,7 @@
 package com.goHealthy.dataTransferObjects;
 
+import com.goHealthy.domain.Aspirante;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
